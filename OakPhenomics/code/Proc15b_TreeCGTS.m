@@ -84,7 +84,7 @@ set(gcf, 'Position', [100 100 700 550], 'Color', 'w');
 
 % 设置坐标轴位置与样式
 set(gca, 'Units', 'Pixels', 'Position', [120 90 520 420], ...
-    'FontSize', 16, 'LineWidth', 1.5);
+    'FontSize', 16, 'FontWeight', 'bold', 'LineWidth', 1.5);
 box on; hold on;
 
 % 配色与样式设置
@@ -106,8 +106,8 @@ mdl = fitlm(Years, LUSlopes);
 disp(mdl);
 
 % 坐标轴与标签
-xlabel('Year', 'FontSize', 16);
-ylabel('\partial leaf unfolding / \partial Ta (days/°C)', 'FontSize', 16);
+xlabel('Year', 'FontSize', 16, 'FontWeight', 'bold');
+ylabel('\partial leaf unfolding / \partial Ta (days/°C)', 'FontSize', 16, 'FontWeight', 'bold');
 
 % 轴范围设置
 ylim([-1.8 -0.6]);

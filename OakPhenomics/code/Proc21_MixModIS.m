@@ -10,6 +10,7 @@ Path_BlockYr ='../output/21_MixModIS/';
 
 load([Path_ISPHE2TMN,'ISPHE2TMN_A20052020.mat']);
 
+ISID = [];
 ISYTmn = [];
 ISATmn = [];
 ISSTmn = [];
@@ -32,6 +33,8 @@ for Year = 2005 : 2020
    
     load([Path_PHE01LV3,strcat('IS',YearName,'.mat')]);
     
+    ISID = [ISID; YrID];
+
     YTmnTemp = QueYTmn(Year - 2004,:);
   
     BlocYTmn = nan(size(YrProv));

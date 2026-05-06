@@ -23,6 +23,7 @@ for I_File=1
 
 % write to .mat
 
+    SiteName = TableInt.Site;
     SiteTrID = TableInt.ID;
     SiteTrait = TableInt.Traitement;
     SiteYear = TableInt.Year;
@@ -45,6 +46,7 @@ TableOut=readtable([Path_PHE01LV1,'IS_Pheno_2005-2015.csv']);
 TableOut1=readtable([Path_PHE01LV1,'IS_Pheno_2016-2021.csv']);
 
 % write to .mat
+    SiteTrID = [TableOut.ID; TableOut1.ID];
     SiteName = [TableOut.SiteName;TableOut1.SiteName];
     VallName = [TableOut.Valley;TableOut1.Valley];
     SiteYear = [TableOut.Year;TableOut1.Year];
@@ -64,8 +66,23 @@ TableOut1 = readtable([Path_PHE01LV1,'CG_Pheno_2016-2021.csv']);
     SiteName = [TableOut.SiteName;TableOut1.SiteName];
     VallName = [TableOut.Valley;TableOut1.Valley];
     SiteTrID = [TableOut.ID;TableOut1.ID];
-%     SiteMother = TableOut.Mother;
     
+    % 2016-2021：从 ID 提取 Mother
+    TableOut1_Mother = cell(height(TableOut1), 1);
+    for i = 1:height(TableOut1)
+        id_str = char(TableOut1.ID(i));
+        tokens = regexp(id_str, '([A-Z0-9]+)Q(\d+)', 'tokens');
+        if ~isempty(tokens)
+            TableOut1_Mother{i} = sprintf('%sfam%s', tokens{1}{1}, tokens{1}{2});
+        else
+            TableOut1_Mother{i} = '';
+        end
+    end
+    TableOut1_Mother = categorical(TableOut1_Mother);
+
+
+    SiteMother = [TableOut.Mother;TableOut1_Mother];
+
     SiteYear = [TableOut.Year;TableOut1.Year];
     SiteElev = [TableOut.Elevation;TableOut1.Elevation];
     SiteProv = [TableOut.Prove;TableOut1.Prove];
@@ -75,5 +92,5 @@ TableOut1 = readtable([Path_PHE01LV1,'CG_Pheno_2016-2021.csv']);
     
     save([Path_PHE01LV2,'NormCG.mat'],'-regexp','^Site*','^Vall*');
 
-    disp(['Done with All']);
+    disp('Done with All');
 

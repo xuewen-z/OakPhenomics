@@ -50,6 +50,8 @@ for Year = BgnYear : EndYear
     YearName = num2str(Year);
    
     Year_Inx = ismember(SiteYear,Year);
+
+    YrID = SiteTrID(Year_Inx);
     YrSite = SiteName(Year_Inx);
     YrVall = VallName(Year_Inx);
 
@@ -81,14 +83,13 @@ for Year = BgnYear : EndYear
     Year_Inx = ismember(SiteYear,Year);
     YrSite = SiteName(Year_Inx);
     YrVall = VallName(Year_Inx);
-    YrTrID = SiteTrID(Year_Inx);
-%     YrMom = SiteMother(Year_Inx);
+    YrID = SiteTrID(Year_Inx);
     YrElev = SiteElev(Year_Inx);
     YrProv = SiteProv(Year_Inx);
     YrLU = SiteLU(Year_Inx);
     YrLC = SiteLC(Year_Inx);
     YrGSL = SiteGSL(Year_Inx);
-        
+    YrMother = SiteMother(Year_Inx);
     
     save([Path_PHE01LV3,strcat('CG',YearName,'.mat')],'-regexp','^Yr*');
         

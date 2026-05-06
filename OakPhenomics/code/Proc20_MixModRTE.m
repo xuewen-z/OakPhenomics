@@ -16,9 +16,15 @@ RTEYTmn = [];
 RTEATmn = [];
 RTESTmn = [];
 
+RTEIDall = [];
+
 for Year = 2007 : 2012
     
     Index = find(RTEYear == Year);
+    IDTemp = RTEID(Index);
+    RTEIDall = [RTEIDall; IDTemp];
+
+
     YTmnTemp = SiteYTmn(Year - 2006,:);
     ElevTemp = RTEElev(Index);
     BlocYTmn = ElevTemp;
@@ -54,4 +60,5 @@ for Year = 2007 : 2012
 
 end
 
+    % RTEID = RTEID_All;
     save([Path_MixModRTE,strcat('MixModRTE.A20072012.mat')],'-regexp','^RTE*');  

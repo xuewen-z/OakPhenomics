@@ -7,7 +7,7 @@ Path_BlockRTE ='../output/19_BlockRTE/';
 
 load([Path_PHE01LV2,'NormRTE.mat']);
 
-mkdir(Path_BlockRTE);
+% mkdir(Path_BlockRTE);
     
     TraitCode = {'Gap'};
     Gap_Code = ismember(SiteTrait,TraitCode);
@@ -19,11 +19,14 @@ mkdir(Path_BlockRTE);
 
     I_Index = intersect(Tree_Index,Gap_Index);
     
+    RTEID = SiteTrID(I_Index);
     RTEBloc =  SiteBloc(I_Index);
     RTEYear =  SiteYear(I_Index);
     RTEElev =  SiteElev(I_Index);
     RTELU =  TreeLU(I_Index);
     RTELC =  TreeLC(I_Index);
     RTEGSL =  TreeGSL(I_Index);
-    
+    RTEProv = TreeProv(I_Index);
+    RTESite = SiteName(I_Index);
+
     save([Path_BlockRTE,strcat('BlockRTE.A20072012.mat')],'-regexp','^RTE*');  
